@@ -1,5 +1,41 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+
+Options = Struct.new(:url)
+
+class Parser
+
+  HELP = "
+  Usage:
+    percoder [OPTION]... [STRING]...
+    Perform percentage encoding on path names or query strings.
+  "
+
+  def self.parse(options)
+    args = Options.new("world")
+
+    opt_parser = OptionParser.new do |opts|
+      opts.banner = HELP
+
+      opts.on("-uURL", "--url=URL", "The url to append the encoded path/params to") do |u|
+        args.url = u
+      end
+
+      opts.on("-h", "--help", "Show help menu") do
+        puts opts
+        exit
+      end
+    end
+
+    opt_parser.parse!(options)
+    return args
+  end
+end
+
+options = Parser.parse %w[--help, --url]
+
+
 BANNER = "
  ██▓███  ▓█████  ██▀███   ▄████▄   ▒█████  ▓█████▄ ▓█████  ██▀███
 ▓██░  ██▒▓█   ▀ ▓██ ▒ ██▒▒██▀ ▀█  ▒██▒  ██▒▒██▀ ██▌▓█   ▀ ▓██ ▒ ██▒
@@ -11,26 +47,6 @@ BANNER = "
 ░░          ░     ░░   ░ ░        ░ ░ ░ ▒   ░ ░  ░    ░     ░░   ░
             ░  ░   ░     ░ ░          ░ ░     ░       ░  ░   ░
 "
-
-HELP = "
-Usage:
-    percoder [OPTION]... [STRING]...
-    Perform percentage encoding on path names or query strings.
-
-Options:
-    --url : the url to append the encoded path/params too
-"
-
-if ARGV.length < 1
-  puts "Too few arguments"
-  puts BANNER
-  puts HELP
-  exit
-end
-
-ARGV.each do |arg|
-  puts "Arg: #{arg}"
-end
 
 ENCODINGS = {
   " " => "%20", "!" => "%21", "\"" => "%22", "#" => "%23", "$" => "%24",
@@ -53,4 +69,3 @@ ENCODINGS = {
   "u" => "%75", "v" => "%76", "w" => "%77", "x" => "%78", "y" => "%79",
   "z" => "%7A", "{" => "%7B", "|" => "%7C", "}" => "%7D", "~" => "%7E"
 }
-
