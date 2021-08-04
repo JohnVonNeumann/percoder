@@ -21,6 +21,17 @@ Options:
     --url : the url to append the encoded path/params too
 "
 
+if ARGV.length < 1
+  puts "Too few arguments"
+  puts BANNER
+  puts HELP
+  exit
+end
+
+ARGV.each do |arg|
+  puts "Arg: #{arg}"
+end
+
 ENCODINGS = {
   " " => "%20", "!" => "%21", "\"" => "%22", "#" => "%23", "$" => "%24",
   "%" => "%25", "&" => "%26", "'" => "%27", "(" => "%28", ")" => "%29",
