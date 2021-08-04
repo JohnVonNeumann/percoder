@@ -12,6 +12,15 @@ BANNER = "
             ░  ░   ░     ░ ░          ░ ░     ░       ░  ░   ░
 "
 
+HELP = "
+Usage:
+    percoder [OPTION]... [STRING]...
+    Perform percentage encoding on path names or query strings.
+
+Options:
+    --url : the url to append the encoded path/params too
+"
+
 ENCODINGS = {
   " " => "%20", "!" => "%21", "\"" => "%22", "#" => "%23", "$" => "%24",
   "%" => "%25", "&" => "%26", "'" => "%27", "(" => "%28", ")" => "%29",
