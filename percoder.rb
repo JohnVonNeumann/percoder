@@ -36,6 +36,8 @@ ENCODINGS = {
   "z" => "%7A", "{" => "%7B", "|" => "%7C", "}" => "%7D", "~" => "%7E"
 }
 
+DECODINGS = ENCODINGS.reverse_each.to_h
+
 Options = Struct.new(:url, :encode, :decode)
 
 class Parser
