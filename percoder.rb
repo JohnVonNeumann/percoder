@@ -52,7 +52,7 @@ class Parser
     args = Options.new("")
 
     opt_parser = OptionParser.new do |opts|
-      opts.banner = HELP
+      opts.banner = BANNER + HELP
 
       # TODO: Handle OptionParser::MissingArgument and format error output for opts
       opts.on("-uURL", "--url=URL", "A url to append the encoded/decoded path/params to") do |u|
