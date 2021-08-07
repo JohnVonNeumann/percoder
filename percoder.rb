@@ -55,7 +55,6 @@ class Parser
       # TODO: Handle OptionParser::MissingArgument and format error output for opts
       opts.on("-uURL", "--url=URL", "A url to append the encoded path/params to") do |u|
         args.url = u
-        puts "Hello world #{u}"
       end
 
       opts.on("-eENCODE", "--encode ENCODE", "A string containing the path/params you wish to be encoded") do |e|
