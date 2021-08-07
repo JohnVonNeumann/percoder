@@ -49,7 +49,7 @@ class Parser
   "
 
   def self.parse(options)
-    args = Options.new("world")
+    args = Options.new("")
 
     opt_parser = OptionParser.new do |opts|
       opts.banner = HELP
@@ -77,6 +77,12 @@ class Parser
       opts.on("-dDECODE", "--decode DECODE", "A string containing the path/params you wish to be decoded") do |d|
         args.decode = d
         decoded = []
+        if !args.url.empty?
+          decoded.append(args.url)
+          if !args.url.end_with?("/")
+            decoded.append("/")
+          end
+        end
         args.decode.scan(/.{3}/).each do |symbol|
           decoded.append(REVERSE_ENCODINGS[symbol])
         end
