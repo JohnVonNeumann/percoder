@@ -60,9 +60,11 @@ class Parser
 
       opts.on("-eENCODE", "--encode ENCODE", "A string containing the path/params you wish to be encoded") do |e|
         args.encode = e
+        decoded = []
         args.encode.split("").each do |char|
-          puts(ENCODINGS[char])
+          decoded.append(ENCODINGS[char])
         end
+        puts decoded.join('')
       end
 
       opts.on("-dDECODE", "--decode DECODE", "A string containing the path/params you wish to be decoded") do |d|
