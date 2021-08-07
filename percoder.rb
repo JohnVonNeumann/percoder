@@ -55,7 +55,7 @@ class Parser
       opts.banner = HELP
 
       # TODO: Handle OptionParser::MissingArgument and format error output for opts
-      opts.on("-uURL", "--url=URL", "A url to append the encoded path/params to") do |u|
+      opts.on("-uURL", "--url=URL", "A url to append the encoded/decoded path/params to") do |u|
         args.url = u
       end
 
