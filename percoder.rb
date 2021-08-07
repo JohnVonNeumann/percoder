@@ -36,7 +36,7 @@ ENCODINGS = {
   "z" => "%7A", "{" => "%7B", "|" => "%7C", "}" => "%7D", "~" => "%7E"
 }
 
-DECODINGS = ENCODINGS.reverse_each.to_h
+REVERSE_ENCODINGS = ENCODINGS.invert
 
 Options = Struct.new(:url, :encode, :decode)
 
@@ -76,6 +76,11 @@ class Parser
 
       opts.on("-dDECODE", "--decode DECODE", "A string containing the path/params you wish to be decoded") do |d|
         args.decode = d
+        decoded = []
+        args.decode.scan(/.{3}/).each do |symbol|
+          decoded.append(REVERSE_ENCODINGS[symbol])
+        end
+        puts decoded.join('')
       end
 
       opts.on("-h", "--help", "Show help menu") do
