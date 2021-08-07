@@ -2,7 +2,7 @@
 
 require 'optparse'
 
-Options = Struct.new(:url)
+Options = Struct.new(:url, :encode, :decode)
 
 class Parser
 
@@ -20,6 +20,18 @@ class Parser
 
       opts.on("-uURL", "--url=URL", "The url to append the encoded path/params to") do |u|
         args.url = u
+        puts "Hello world #{u}"
+      end
+
+      opts.on("-eENCODE", "--encode ENCODE", "A string containing the path/params you wish to be encoded") do |e|
+        args.encode = e
+        args.encode.split("").each do |char|
+          puts(ENCODINGS[char])
+        end
+      end
+
+      opts.on("-dDECODE", "--decode DECODE", "A string containing the path/params you wish to be decoded") do |d|
+        args.decode = d
       end
 
       opts.on("-h", "--help", "Show help menu") do
