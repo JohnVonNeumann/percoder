@@ -45,8 +45,7 @@ class Parser
   end
 end
 
-options = Parser.parse %w[--help --url]
-
+options = Parser.parse(ARGV)
 
 BANNER = "
  ██▓███  ▓█████  ██▀███   ▄████▄   ▒█████  ▓█████▄ ▓█████  ██▀███
