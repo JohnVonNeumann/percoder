@@ -59,17 +59,17 @@ class Parser
 
       opts.on("-eENCODE", "--encode ENCODE", "A string containing the path/params you wish to be encoded") do |e|
         args.encode = e
-        decoded = []
+        encoded = []
         if !args.url.empty?
-          decoded.append(args.url)
+          encoded.append(args.url)
           if !args.url.end_with?("/")
-            decoded.append("/")
+            encoded.append("/")
           end
         end
         args.encode.split("").each do |char|
-          decoded.append(ENCODINGS[char])
+          encoded.append(ENCODINGS[char])
         end
-        puts decoded.join('')
+        puts encoded.join('')
       end
 
       opts.on("-dDECODE", "--decode DECODE", "A string containing the path/params you wish to be decoded") do |d|
