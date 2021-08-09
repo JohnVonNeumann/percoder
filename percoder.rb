@@ -119,4 +119,9 @@ def decode_to_s(dstring)
   return decode_to_s(decoded)
 end
 
-options = Parser.parse(ARGV)
+begin
+  Parser.parse(ARGV)
+rescue OptionParser::MissingArgument
+  puts 'You need to enter a valid string for the --url option'
+  exit
+end
