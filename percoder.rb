@@ -53,13 +53,12 @@ class Parser
     opt_parser = OptionParser.new do |opts|
       opts.banner = BANNER + HELP
 
-      # TODO: Handle OptionParser::MissingArgument and format error output for opts
-      opts.on('-uURL', '--url=URL', 'A url to append the encoded/decoded path/params to') do |u|
-        args.url = u
-      end
-
       opts.on('-2' ,'--double', 'A flag that indicates double encoding/decoding') do
         args.double = true
+      end
+
+      opts.on('-uURL', '--url URL', 'A url to append the encoded/decoded path/params to') do |u|
+        args.url = u
       end
 
       opts.on('-eENCODE', '--encode ENCODE', 'A string containing the path/params you wish to be encoded') do |e|
