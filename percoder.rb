@@ -65,7 +65,6 @@ class Parser
       opts.on('-eENCODE', '--encode ENCODE', 'A string containing the path/params you wish to be encoded') do |e|
         args.encode = e
         encoded = []
-        double_encoded = []
         args.encode.split('').each do |char|
           echar = ENCODINGS[char]
           if args.double
