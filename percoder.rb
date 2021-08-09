@@ -84,6 +84,10 @@ class Parser
       end
 
       opts.on('-dDECODE', '--decode DECODE', 'A string containing the path/params you wish to be decoded') do |d|
+        if d.length % 3 != 0
+          puts 'Please enter valid length input. Percent encoding keys are 3 chars in length.'
+          exit
+        end
         args.decode = d
         decoded = decode_to_s(args.decode)
         unless args.url.empty?
@@ -109,7 +113,6 @@ def decode_to_s(dstring)
     return dstring
   end
   decoded = ""
-  # TODO: handle scanning of < & > 3 chars
   dstring.scan(/.{3}/).each do |symbol|
     decoded.concat(REVERSE_ENCODINGS[symbol])
   end
