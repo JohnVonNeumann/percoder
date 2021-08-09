@@ -122,6 +122,6 @@ end
 begin
   Parser.parse(ARGV)
 rescue OptionParser::MissingArgument
-  puts 'You need to enter a valid string for the --url option'
+  puts 'You need to provide a value to --option calls.'
   exit
 end
