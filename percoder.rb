@@ -86,15 +86,12 @@ class Parser
 
       opts.on('-dDECODE', '--decode DECODE', 'A string containing the path/params you wish to be decoded') do |d|
         args.decode = d
-        decoded = []
+        decoded = decode_to_s(args.decode)
         unless args.url.empty?
           decoded.append(args.url)
           decoded.append('/') unless args.url.end_with?('/')
         end
-        args.decode.scan(/.{3}/).each do |symbol|
-          decoded.append(REVERSE_ENCODINGS[symbol])
-        end
-        puts decoded.join('')
+        puts decoded
       end
 
       opts.on('-h', '--help', 'Show help menu') do
@@ -106,6 +103,18 @@ class Parser
     opt_parser.parse!(options)
     args
   end
+end
+
+def decode_to_s(dstring)
+  unless dstring.include?('%')
+    return dstring
+  end
+  decoded = ""
+  # TODO: handle scanning of < & > 3 chars
+  dstring.scan(/.{3}/).each do |symbol|
+    decoded.concat(REVERSE_ENCODINGS[symbol])
+  end
+  return decode_to_s(decoded)
 end
 
 options = Parser.parse(ARGV)
