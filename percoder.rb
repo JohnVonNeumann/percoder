@@ -39,7 +39,7 @@ ENCODINGS = {
 
 REVERSE_ENCODINGS = ENCODINGS.invert
 
-Options = Struct.new(:url, :encode, :decode)
+Options = Struct.new(:url, :encode, :decode, :double)
 
 class Parser
   HELP = "
@@ -59,15 +59,28 @@ class Parser
         args.url = u
       end
 
+      opts.on('-2' ,'--double', 'A flag that indicates double encoding/decoding') do
+        args.double = true
+      end
+
       opts.on('-eENCODE', '--encode ENCODE', 'A string containing the path/params you wish to be encoded') do |e|
         args.encode = e
         encoded = []
-        unless args.url.empty?
-          encoded.append(args.url)
-          encoded.append('/') unless args.url.end_with?('/')
-        end
+        double_encoded = []
         args.encode.split('').each do |char|
-          encoded.append(ENCODINGS[char])
+          echar = ENCODINGS[char]
+          if args.double
+            echar.split('').each do |char|
+              encoded.append(ENCODINGS[char])
+            end
+          else
+            encoded.append(echar)
+          end
+        end
+
+        unless args.url.empty?
+          encoded.prepend('/') unless args.url.end_with?('/')
+          encoded.prepend(args.url)
         end
         puts encoded.join('')
       end
